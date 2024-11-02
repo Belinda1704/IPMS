@@ -30,11 +30,11 @@ export default function Home() {
       </section>
 
       <Image 
-      src="public/assets/images/onboarding-img.png"
+      src="/public/assets/images/onboarding-img.png"
       height={1000}
       width={1000}
       alt="patient"
-      className="side-img max-w-[50%0"
+      className="side-img max-w-[50%]"
        />
     </div>
   )
