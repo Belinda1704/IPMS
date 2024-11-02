@@ -13,6 +13,8 @@ export default function Home() {
           alt="patient"
           className="mb-12 h-10 w-fit"         
           />
+
+        
         </div>
       </section>
     </div>
