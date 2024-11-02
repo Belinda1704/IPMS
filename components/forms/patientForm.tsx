@@ -1,9 +1,9 @@
 import React from "react";
 
-const patientForm = () => {
+const PatientForm = () => {
     return (
     <div>patientForm</div>
 )
 }
 
-export default patientForm
+export default PatientForm
