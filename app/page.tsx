@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import PatientForm from "@/components/forms/patientForm";
+import PatientForm from "@/components/forms/PatientForm";
 import Image from "next/image";
 
 export default function Home() {

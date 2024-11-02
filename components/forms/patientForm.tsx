@@ -2,7 +2,7 @@ import React from "react";
 
 const PatientForm = () => {
     return (
-    <div>patientForm</div>
+    <div>PatientForm</div>
 )
 }
 
