@@ -7,7 +7,7 @@ export default function Home() {
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
           <Image 
-          src="public/assets/icons/IPMs-logo.svg"
+          src="public/assets/icons/Ipms-logo.svg"
           height={1000}
           width={1000}
           alt="patient"
