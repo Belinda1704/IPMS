@@ -6,7 +6,7 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "../ui/input"
-import {CustomFormField} from "@/components/CustomFormField"
+import { CustomFormField } from "@/components/CustomFormField"
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -51,6 +51,16 @@ const PatientForm = () => {
           placeholder="John Doe"
           iconSrc="/public/assets/icons/user.svg"
           iconAlt="user"
+        />
+
+        <CustomFormField
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="email"
+          label="Email"
+          placeholder="johnsoe@jsmastery.pro"
+          iconSrc="/public/assets/icons/email.svg"
+          iconAlt="email"
         />
 
         <FormField
