@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Control } from "react-hook-form"
-import { FormFieldType, FormFieldTypes } from "./forms/PatientForm"
+import { FormFieldType } from "./forms/PatientForm"
 
 interface CustomProps {
     control: Control<any>,
@@ -36,7 +36,7 @@ const RenderField = ({ field, props}: { field: any; props: CustomProps }) => {
     )
 }
 
-const customFormField = (props: CustomProps) => {
+const CustomFormField = (props: CustomProps) => {
     const { control, fieldType, name, label } = props;
     return (
         <FormField
@@ -54,3 +54,5 @@ const customFormField = (props: CustomProps) => {
                 </FormItem>
             )} />)
 }
+
+export { FormFieldType, CustomFormField }
