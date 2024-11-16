@@ -1,12 +1,17 @@
-"use client"
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { ErrorOption, Field, FieldArray, FieldArrayPath, FieldError, FieldErrors, FieldName, FieldRefs, FieldValues, FormState, InternalFieldName, RegisterOptions, SubmitErrorHandler, SubmitHandler, useForm, UseFormRegisterReturn } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "../ui/input"
 import { CustomFormField } from "@/components/CustomFormField"
+import SubmitButton from "../SubmitButton"
+import { useState } from "react"
+import { UserFormValidation } from "@/lib/validation"
+import { useRouter } from "next/navigation"
+import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -18,23 +23,34 @@ export enum FormFieldType {
   SKELETON = 'skeleton',
 }
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
 
-const PatientForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export const PatientForm = () => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
+      email: "",
+      phone: "",
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function onSubmit({ name, email, phone }: z.infer<typeof UserFormValidation>) {
+    setIsLoading(true);
+  
+    try {
+      const userData = { name, email, phone };
+
+      const user = await createUser(userData);
+
+      if(user) router.push(`/patients/${user.$id}/register`)
+    }catch(error) {
+     console.log(error);
+    }
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
@@ -48,7 +64,7 @@ const PatientForm = () => {
           control={form.control}
           name="name"
           label="Full name"
-          placeholder="John Doe"
+          placeholder="John Irakoze"
           iconSrc="/public/assets/icons/user.svg"
           iconAlt="user"
         />
@@ -58,31 +74,24 @@ const PatientForm = () => {
           control={form.control}
           name="email"
           label="Email"
-          placeholder="johnsoe@jsmastery.pro"
+          placeholder="johnirakoze@gmail.com"
           iconSrc="/public/assets/icons/email.svg"
           iconAlt="email"
         />
 
-        <FormField
+        <CustomFormField
+          fieldType={FormFieldType.PHONE_INPUT}
           control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+          name="phone"
+          label="Phone number"
+          placeholder="(078) 330-821"
         />
-        <Button type="submit">Submit</Button>
+
+        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
-  )
-}
+  );
+};
 
 export default PatientForm
+
