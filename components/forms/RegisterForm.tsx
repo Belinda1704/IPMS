@@ -22,7 +22,7 @@ import { PatientFormValidation } from "@/lib/validation";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-number-input/style.css";
-import { CustomFormField, FormFieldType } from "../CustomFormField";
+import { CustomFormField, FormFieldType } from "../customFormField";
 import { FileUploader } from "../FileUploader";
 import SubmitButton from "../SubmitButton";
 
@@ -59,7 +59,7 @@ const RegisterForm = ({ user }: { user: User }) => {
     }
 
     try {
-      const patientData = {
+      const patient = {
         userId: user.$id,
         name: values.name,
         email: values.email,
@@ -85,7 +85,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         privacyConsent: values.privacyConsent,
       };
 
-      const newPatient = await registerPatient(patientData);
+      const newPatient = await registerPatient(patient);
 
       if (newPatient) {
         router.push(`/patients/${user.$id}/new-appointment`);
@@ -119,7 +119,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="name"
-            placeholder="John Irakoze"
+            placeholder="John Doe"
             iconSrc="/public/assets/icons/user.svg"
             iconAlt="user"
           />
@@ -131,7 +131,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="email"
               label="Email address"
-              placeholder="johnirakoze@gmail.com"
+              placeholder="johndoe@gmail.com"
               iconSrc="/public/assets/icons/email.svg"
               iconAlt="email"
             />
@@ -187,7 +187,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="address"
               label="Address"
-              placeholder="KG 541 Street, Nyarutarama, Kigali, Rwanda"
+              placeholder=" KN 5 Street 123, Kigali, Rwanda"
             />
 
             <CustomFormField
@@ -214,7 +214,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="emergencyContactNumber"
               label="Emergency contact number"
-              placeholder="(079) 999-9999"
+              placeholder="(079) 799-9999"
             />
           </div>
         </section>
@@ -263,7 +263,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="insurancePolicyNumber"
               label="Insurance policy number"
-              placeholder="PRIME-1234567890"
+              placeholder="ABC123456789"
             />
           </div>
 
@@ -293,7 +293,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="familyMedicalHistory"
               label=" Family medical history (if relevant)"
-              placeholder="Mother had breast cancer, Father has hypertension"
+              placeholder="Mother had brain cancer, Father has hypertension"
             />
 
             <CustomFormField
@@ -330,7 +330,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             control={form.control}
             name="identificationNumber"
             label="Identification Number"
-            placeholder="123456789"
+            placeholder="1996012345678901"
           />
 
           <CustomFormField
